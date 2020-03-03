@@ -8,10 +8,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 export const routes = (
   <Switch>
     <Route exact path="/" component={Home}>
-      <Redirect to="/cars" />
+      <Redirect to="/automobiles" />
     </Route>
-    <Route exact path="/cars" component={ListCarCard} />
-    <Route exact path="/cars/:id" component={CarInfo} />
+    <Route exact path="/automobiles" component={ListCarCard} />
+    <Route exact path="/automobiles/:id" component={CarInfo} />
     <Route component={NotFound} />
   </Switch>
 );

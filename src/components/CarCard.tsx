@@ -17,7 +17,8 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps';
 const CarCard: React.FC = () => {
   const [checked, setChecked] = useState(false);
 
-  const handleChange = () => {
+  const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    event.stopPropagation();
     setChecked(prev => !prev);
   };
 
@@ -94,7 +95,7 @@ const CarCard: React.FC = () => {
           </Box>
           <Divider />
           <Box mt={2}>
-            <Box mb={2} onClick={handleChange}>
+            <Box mb={2} onClick={handleClick}>
               <LocationOnIcon style={{ verticalAlign: 'bottom' }} />
               Юг-Авто, Краснодар
             </Box>
