@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
       data-selector="4"
     >
       <Box className="footer-container">
-        <Box>Copyright © 2018 Ilya Kovalev</Box>
+        <Box>Copyright © 2020 Ilya Kovalev</Box>
         <Box>Privacy | Terms of Use | Site Map</Box>
         <Box>
           <Link to="https://vk.com/kaizerrus" className="social-vk" />

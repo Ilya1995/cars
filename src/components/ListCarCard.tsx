@@ -54,7 +54,7 @@ export const ListCarCard: React.FC = () => {
           <Zoom in style={{ marginTop: '50px' }} key={index} timeout={500}>
             <Paper
               elevation={4}
-              onClick={() => history.push(`automobiles/${index}`)}
+              onClick={() => history.push(`/cars/automobiles/${index}`)}
             >
               <CarCard />
             </Paper>
