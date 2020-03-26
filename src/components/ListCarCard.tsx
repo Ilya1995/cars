@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -9,9 +10,22 @@ import Box from '@material-ui/core/Box';
 import VisibilitySensor from 'react-visibility-sensor';
 
 import CarCard from './CarCard';
+import { getCars } from '../actions/cars';
+import { RootReducerType } from '../reducers';
+import { CarType } from '../types/cars';
 
 export const ListCarCard: React.FC = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const cars: CarType[] = useSelector(
+    (state: RootReducerType) => state.cars.cars
+  );
+  console.log(cars);
+
+  useEffect(() => {
+    dispatch(getCars());
+  }, [dispatch]);
+
   const [qq, setQq] = useState([
     Math.random(),
     Math.random(),
@@ -50,13 +64,13 @@ export const ListCarCard: React.FC = () => {
         justify="space-around"
         alignItems="center"
       >
-        {qq.map((el, index) => (
-          <Zoom in style={{ marginTop: '50px' }} key={index} timeout={500}>
+        {cars.map((car: CarType) => (
+          <Zoom in style={{ marginTop: '50px' }} key={car.id} timeout={500}>
             <Paper
               elevation={4}
-              onClick={() => history.push(`/cars/automobiles/${index}`)}
+              onClick={() => history.push(`/cars/automobiles/${car.id}`)}
             >
-              <CarCard />
+              <CarCard car={car} />
             </Paper>
           </Zoom>
         ))}

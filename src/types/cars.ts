@@ -3,10 +3,17 @@ export const GET_CARS = 'GET_CARS';
 export const GET_BRAND_CARS = 'GET_BRAND_CARS';
 export const PUT_BRAND_CARS = 'PUT_BRAND_CARS';
 
+type ImageType = {
+  type: string;
+  url: string;
+};
+
 export type CarType = {
+  id: string;
   model: string;
   brand: string;
   year: number;
+  images: ImageType[];
 };
 
 export type InitialStateType = {

@@ -8,7 +8,7 @@ import {
 
 function fetchDataCars() {
   return fetch(
-    'https://jlrc.dev.perx.ru/carstock/api/v1/vehicles/?state=active&hidden=false&group=new',
+    'https://jlrc.dev.perx.ru/carstock/api/v1/vehicles/?state=active&hidden=false&group=new&per_page=6&page=1&sort=price',
     {
       method: 'GET',
       headers: { 'X-CS-Dealer-Id-Only': '1' }
@@ -29,7 +29,7 @@ function* watchGetCarsAsync() {
   yield takeLatest(GET_CARS, getCarsAsync);
 }
 
-function fetchDataBranCars() {
+function fetchDataBrandCars() {
   return fetch('https://jlrc.dev.perx.ru/carquote/api/v1/').then(response =>
     response.json()
   );
@@ -37,7 +37,7 @@ function fetchDataBranCars() {
 
 function* getBrandCarsAsync() {
   try {
-    const data = yield call(() => fetchDataBranCars());
+    const data = yield call(() => fetchDataBrandCars());
     console.log(data);
 
     yield put({ type: PUT_BRAND_CARS, payload: data });

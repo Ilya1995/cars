@@ -13,9 +13,16 @@ import Zoom from '@material-ui/core/Zoom';
 import Paper from '@material-ui/core/Paper';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import { CarType } from '../types/cars';
+import isEmpty from 'lodash/isEmpty';
 
-const CarCard: React.FC = () => {
+type PropsType = {
+  car: CarType;
+};
+
+const CarCard: React.FC<PropsType> = ({ car }) => {
   const [checked, setChecked] = useState(false);
+  console.log(car);
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
@@ -26,8 +33,12 @@ const CarCard: React.FC = () => {
     <Card className="card-root shadow">
       <CardActionArea>
         <CardMedia
-          style={{ height: 140 }}
-          image="//media.jlr-connect.com/Dim2ibPVr83sJibS28oYWj"
+          style={{ height: 200 }}
+          image={
+            !isEmpty(car.images)
+              ? car.images[0].url
+              : '//media.jlr-connect.com/Dim2ibPVr83sJibS28oYWj'
+          }
           title="Contemplative Reptile"
         />
         <CardContent>
@@ -100,7 +111,7 @@ const CarCard: React.FC = () => {
               Юг-Авто, Краснодар
             </Box>
             <Zoom in={checked} style={{ display: checked ? '' : 'none' }}>
-              <Paper elevation={4}>
+              <Paper onClick={event => event.stopPropagation()} elevation={4}>
                 <YMaps>
                   <Map
                     defaultState={{
