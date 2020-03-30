@@ -22,6 +22,9 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    colorPrimary: {
+      backgroundColor: '#333'
+    },
     grow: {
       flexGrow: 1
     },
@@ -171,7 +174,7 @@ export const Header: React.FC = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.colorPrimary}>
         <Toolbar>
           <IconButton
             edge="start"

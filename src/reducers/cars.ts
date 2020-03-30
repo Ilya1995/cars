@@ -10,7 +10,7 @@ export function carsReducer(
 ): InitialStateType {
   switch (action.type) {
     case PUT_CARS:
-      return { ...state, cars: action.payload };
+      return { ...state, cars: [...state.cars, ...action.payload] };
     default:
       return state;
   }

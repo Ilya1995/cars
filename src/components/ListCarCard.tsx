@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -8,7 +8,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import VisibilitySensor from 'react-visibility-sensor';
-
 import CarCard from './CarCard';
 import { getCars } from '../actions/cars';
 import { RootReducerType } from '../reducers';
@@ -20,37 +19,19 @@ export const ListCarCard: React.FC = () => {
   const cars: CarType[] = useSelector(
     (state: RootReducerType) => state.cars.cars
   );
-  console.log(cars);
+  const loadingBottom: boolean = useSelector(
+    (state: RootReducerType) => state.app.loadingBottom
+  );
 
-  useEffect(() => {
-    dispatch(getCars());
-  }, [dispatch]);
-
-  const [qq, setQq] = useState([
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random(),
-    Math.random()
-  ]);
-  const [loadingBottom, setLoadingBottom] = useState(false);
+  const [page, setPage] = useState<number>(0);
 
   const onChangeBottom = (isVisible: boolean) => {
     console.log(`setLoadingBottom ${isVisible}`);
     if (isVisible) {
       setTimeout(() => {
-        setLoadingBottom(true);
-        console.log(1, qq, qq.length);
-        qq.push(...[Math.random(), Math.random(), Math.random()]);
-        console.log(3, qq, qq.length);
-        setTimeout(() => {
-          setQq([...qq]);
-          setLoadingBottom(false);
-        }, 2000);
+        const newPage = page + 1;
+        dispatch(getCars({ page: newPage }));
+        setPage(newPage);
       }, 500);
     }
   };

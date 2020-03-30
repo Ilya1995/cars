@@ -8,11 +8,26 @@ type ImageType = {
   url: string;
 };
 
+type PriceType = {
+  discount: number[];
+  value: number[][];
+};
+
+type OfficeType = {
+  city: string;
+  location: { coordinates: number[] };
+};
+
 export type CarType = {
   id: string;
+  name: string;
+  price: PriceType;
   model: string;
   brand: string;
   year: number;
+  dealerName: string;
+  color: { name: string };
+  main_office: OfficeType;
   images: ImageType[];
 };
 
@@ -20,8 +35,14 @@ export type InitialStateType = {
   cars: CarType[];
 };
 
+export type CarPaginationType = {
+  perPage?: number;
+  page: number;
+};
+
 export type GetCarsActionType = {
   type: typeof GET_CARS;
+  payload?: CarPaginationType;
 };
 
 export type PutCarsActionType = {

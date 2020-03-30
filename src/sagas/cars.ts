@@ -1,27 +1,31 @@
+import { NotificationManager } from 'react-notifications';
 import { all, takeLatest, call, put } from 'redux-saga/effects';
 import {
   GET_CARS,
   PUT_CARS,
   GET_BRAND_CARS,
-  PUT_BRAND_CARS
+  PUT_BRAND_CARS,
+  GetCarsActionType
 } from '../types/cars';
+import { SET_LOADER_BOTTOM } from '../types/app';
 
-function fetchDataCars() {
+function fetchDataCars({ perPage = 6, page = 1 }) {
+  console.log(page);
+
   return fetch(
-    'https://jlrc.dev.perx.ru/carstock/api/v1/vehicles/?state=active&hidden=false&group=new&per_page=6&page=1&sort=price',
-    {
-      method: 'GET',
-      headers: { 'X-CS-Dealer-Id-Only': '1' }
-    }
+    `https://jlrc.dev.perx.ru/carstock/api/v1/vehicles/?state=active&hidden=false&group=new&per_page=${perPage}&page=${page}&sort=price`
   ).then(response => response.json());
 }
 
-function* getCarsAsync() {
+function* getCarsAsync(action: GetCarsActionType) {
   try {
-    const data = yield call(() => fetchDataCars());
+    yield put({ type: SET_LOADER_BOTTOM, payload: true });
+    const data = yield call(() => fetchDataCars(action.payload || {}));
     yield put({ type: PUT_CARS, payload: data });
   } catch (error) {
-    alert('Error loading cars');
+    NotificationManager.error('Error loading cars', 'Error!');
+  } finally {
+    yield put({ type: SET_LOADER_BOTTOM, payload: false });
   }
 }
 
@@ -43,7 +47,7 @@ function* getBrandCarsAsync() {
     yield put({ type: PUT_BRAND_CARS, payload: data });
   } catch (error) {
     console.error(error);
-    alert('Error loading brand');
+    NotificationManager.error('Error loading brand', 'Error!');
   }
 }
 

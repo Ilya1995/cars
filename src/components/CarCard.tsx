@@ -12,7 +12,7 @@ import Box from '@material-ui/core/Box';
 import Zoom from '@material-ui/core/Zoom';
 import Paper from '@material-ui/core/Paper';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { YMaps, Map, Placemark } from 'react-yandex-maps';
+import YMap from './YMap';
 import { CarType } from '../types/cars';
 import isEmpty from 'lodash/isEmpty';
 
@@ -20,14 +20,22 @@ type PropsType = {
   car: CarType;
 };
 
+const DEFAULT_PRICE = [3500000, 3750000];
+
 const CarCard: React.FC<PropsType> = ({ car }) => {
   const [checked, setChecked] = useState(false);
+  const lastValue = car.price.value.pop() || DEFAULT_PRICE;
+  const price = { old: lastValue[0], new: lastValue[1] };
+
   console.log(car);
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
     setChecked(prev => !prev);
   };
+
+  const formatPrice = (price: number): string =>
+    price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
   return (
     <Card className="card-root shadow">
@@ -43,10 +51,10 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
         />
         <CardContent>
           <Typography variant="h5" component="h2">
-            Range Rover Evoque
+            {`${car.brand} ${car.model}`}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Evoque 5 Door 2.0 TD4 Diesel 150 SE
+            {car.name}
           </Typography>
 
           <Box component="fieldset" mb={3} borderColor="transparent">
@@ -60,19 +68,23 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
             </Typography>
             <Typography component="span">
               <Box fontWeight="fontWeightBold" fontSize={16}>
-                2 500 000
+                {formatPrice(price.new)}
               </Box>
             </Typography>
           </Grid>
-          <Grid container justify="flex-end" alignItems="center">
-            <Typography
-              color="textSecondary"
-              className="crossed-out-text"
-              component="span"
-            >
-              <Box fontSize={14}>3 100 000</Box>
-            </Typography>
-          </Grid>
+          {price.new !== price.old ? (
+            <Grid container justify="flex-end" alignItems="center">
+              <Typography
+                color="textSecondary"
+                className="crossed-out-text"
+                component="span"
+              >
+                <Box fontSize={14}>{formatPrice(price.old)}</Box>
+              </Typography>
+            </Grid>
+          ) : (
+            <Box>&nbsp;</Box>
+          )}
           <Divider />
 
           <Box
@@ -86,7 +98,7 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
             <Box component="span" color="text.secondary">
               ЦВЕТ
             </Box>
-            <Box component="span">Santorini Black</Box>
+            <Box component="span">{car.color.name}</Box>
           </Box>
 
           <Divider />
@@ -102,38 +114,17 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
             <Box component="span" color="text.secondary">
               ГОД
             </Box>
-            <Box component="span">2018</Box>
+            <Box component="span">{car.year}</Box>
           </Box>
           <Divider />
           <Box mt={2}>
             <Box mb={2} onClick={handleClick}>
               <LocationOnIcon style={{ verticalAlign: 'bottom' }} />
-              Юг-Авто, Краснодар
+              {`${car.dealerName}, ${car.main_office.city}`}
             </Box>
             <Zoom in={checked} style={{ display: checked ? '' : 'none' }}>
               <Paper onClick={event => event.stopPropagation()} elevation={4}>
-                <YMaps>
-                  <Map
-                    defaultState={{
-                      center: [56.311102, 43.790876],
-                      zoom: 14,
-                      controls: [
-                        'zoomControl',
-                        'fullscreenControl',
-                        'geolocationControl',
-                        'trafficControl'
-                      ]
-                    }}
-                    modules={[
-                      'control.ZoomControl',
-                      'control.FullscreenControl',
-                      'control.GeolocationControl',
-                      'control.TrafficControl'
-                    ]}
-                  >
-                    <Placemark defaultGeometry={[56.311102, 43.790876]} />
-                  </Map>
-                </YMaps>
+                <YMap coordinates={car.main_office.location.coordinates} />
               </Paper>
             </Zoom>
           </Box>
