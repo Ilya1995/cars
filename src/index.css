@@ -26,6 +26,20 @@ code {
   min-width: 350px;
 }
 
+#loading {
+  color: #757575;
+  margin: 50px auto;
+  display: block;
+}
+
+.linear-progress .MuiLinearProgress-barColorPrimary {
+  background-color: #757575;
+}
+
+.linear-progress.MuiLinearProgress-colorPrimary {
+  background-color: #c4c1c1;
+}
+
 #root .shadow {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
@@ -34,4 +48,15 @@ code {
 #root .shadow:hover {
   box-shadow: 0 2px 20px 15px rgba(0, 0, 0, 0.2),
     0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-root .img-search {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 6px;
+  width: 16px;
+  height: 18px;
+  fill: #9fa2a5;
 }

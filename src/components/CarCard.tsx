@@ -12,15 +12,15 @@ import Box from '@material-ui/core/Box';
 import Zoom from '@material-ui/core/Zoom';
 import Paper from '@material-ui/core/Paper';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import ImageSearchOutlinedIcon from '@material-ui/icons/ImageSearchOutlined';
 import YMap from './YMap';
 import { CarType } from '../types/cars';
+import { DEFAULT_PRICE, formatPrice } from '../resources';
 import isEmpty from 'lodash/isEmpty';
 
 type PropsType = {
   car: CarType;
 };
-
-const DEFAULT_PRICE = [3500000, 3750000];
 
 const CarCard: React.FC<PropsType> = ({ car }) => {
   const [checked, setChecked] = useState(false);
@@ -34,21 +34,40 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
     setChecked(prev => !prev);
   };
 
-  const formatPrice = (price: number): string =>
-    price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-
   return (
     <Card className="card-root shadow">
       <CardActionArea>
-        <CardMedia
-          style={{ height: 200 }}
-          image={
-            !isEmpty(car.images)
-              ? car.images[0].url
-              : '//media.jlr-connect.com/Dim2ibPVr83sJibS28oYWj'
-          }
-          title="Contemplative Reptile"
-        />
+        <Box position={'relative'}>
+          <CardMedia
+            style={{ height: 200 }}
+            image={
+              !isEmpty(car.images)
+                ? car.images[0].url
+                : '//media.jlr-connect.com/Dim2ibPVr83sJibS28oYWj'
+            }
+            title="Contemplative Reptile"
+          />
+          {Boolean(car.images?.length) && (
+            <Box
+              position={'absolute'}
+              display={'flex'}
+              right={0}
+              bottom={0}
+              top={'inherit'}
+            >
+              <Box
+                position={'relative'}
+                fontSize={10}
+                color={'#fff'}
+                bgcolor={'#4a4f55'}
+                p={'10px 10px 7px 25px'}
+              >
+                <ImageSearchOutlinedIcon className="img-search" />
+                {car.images.length}
+              </Box>
+            </Box>
+          )}
+        </Box>
         <CardContent>
           <Typography variant="h5" component="h2">
             {`${car.brand} ${car.model}`}
@@ -61,26 +80,22 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
             <Rating name="read-only" value={Math.random() * 4 + 2} readOnly />
           </Box>
           <Grid container justify="space-between" alignItems="center">
-            <Typography component="span">
-              <Box fontWeight="fontWeightBold" fontSize={16}>
-                ЦЕНА, РУБ.
-              </Box>
-            </Typography>
-            <Typography component="span">
-              <Box fontWeight="fontWeightBold" fontSize={16}>
-                {formatPrice(price.new)}
-              </Box>
-            </Typography>
+            <Box fontWeight="fontWeightBold" fontSize={16}>
+              ЦЕНА, РУБ.
+            </Box>
+            <Box fontWeight="fontWeightBold" fontSize={16}>
+              {formatPrice(price.new)}
+            </Box>
           </Grid>
           {price.new !== price.old ? (
             <Grid container justify="flex-end" alignItems="center">
-              <Typography
-                color="textSecondary"
+              <Box
+                fontSize={14}
                 className="crossed-out-text"
-                component="span"
+                color="text.secondary"
               >
-                <Box fontSize={14}>{formatPrice(price.old)}</Box>
-              </Typography>
+                {formatPrice(price.old)}
+              </Box>
             </Grid>
           ) : (
             <Box>&nbsp;</Box>

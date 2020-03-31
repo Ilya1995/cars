@@ -1,9 +1,11 @@
 export const PUT_CARS = 'PUT_CARS';
+export const PUT_CAR = 'PUT_CAR';
 export const GET_CARS = 'GET_CARS';
+export const GET_CAR = 'GET_CAR';
 export const GET_BRAND_CARS = 'GET_BRAND_CARS';
 export const PUT_BRAND_CARS = 'PUT_BRAND_CARS';
 
-type ImageType = {
+export type ImageType = {
   type: string;
   url: string;
 };
@@ -33,6 +35,7 @@ export type CarType = {
 
 export type InitialStateType = {
   cars: CarType[];
+  car: CarType | null;
 };
 
 export type CarPaginationType = {
@@ -45,9 +48,19 @@ export type GetCarsActionType = {
   payload?: CarPaginationType;
 };
 
+export type GetCarActionType = {
+  type: typeof GET_CAR;
+  payload: string;
+};
+
 export type PutCarsActionType = {
   type: typeof PUT_CARS;
   payload: CarType[];
+};
+
+export type PutCarActionType = {
+  type: typeof PUT_CAR;
+  payload: CarType;
 };
 
 export type GetBrandCarsActionType = {
@@ -56,5 +69,7 @@ export type GetBrandCarsActionType = {
 
 export type CarsActionTypes =
   | GetCarsActionType
+  | GetCarActionType
   | PutCarsActionType
+  | PutCarActionType
   | GetBrandCarsActionType;

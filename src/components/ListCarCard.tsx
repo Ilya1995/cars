@@ -12,6 +12,7 @@ import CarCard from './CarCard';
 import { getCars } from '../actions/cars';
 import { RootReducerType } from '../reducers';
 import { CarType } from '../types/cars';
+import { PER_PAGE } from '../resources';
 
 export const ListCarCard: React.FC = () => {
   const history = useHistory();
@@ -23,10 +24,9 @@ export const ListCarCard: React.FC = () => {
     (state: RootReducerType) => state.app.loadingBottom
   );
 
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(cars?.length / PER_PAGE || 0);
 
   const onChangeBottom = (isVisible: boolean) => {
-    console.log(`setLoadingBottom ${isVisible}`);
     if (isVisible) {
       setTimeout(() => {
         const newPage = page + 1;
@@ -59,10 +59,10 @@ export const ListCarCard: React.FC = () => {
       <Container maxWidth="sm">
         <Box my={5}>
           {loadingBottom ? (
-            <LinearProgress />
+            <LinearProgress className="linear-progress" />
           ) : (
             <VisibilitySensor onChange={onChangeBottom}>
-              <Box textAlign="center">. . . ещё 165 . . .</Box>
+              <Box textAlign="center">. . . Загрузить еще . . .</Box>
             </VisibilitySensor>
           )}
         </Box>
