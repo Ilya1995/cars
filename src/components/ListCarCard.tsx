@@ -46,7 +46,12 @@ export const ListCarCard: React.FC = () => {
         alignItems="center"
       >
         {cars.map((car: CarType) => (
-          <Zoom in style={{ marginTop: '50px' }} key={car.id} timeout={500}>
+          <Zoom
+            in
+            style={{ marginTop: '50px', maxWidth: '350px' }}
+            key={car.id}
+            timeout={500}
+          >
             <Paper
               elevation={4}
               onClick={() => history.push(`/cars/automobiles/${car.id}`)}

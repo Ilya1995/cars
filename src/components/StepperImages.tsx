@@ -37,6 +37,7 @@ const StepperImages: React.FC<PropsType> = ({ images }) => {
         interval={5000}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        className="step-img"
       >
         {images.map((step, index) => (
           <Box key={index}>

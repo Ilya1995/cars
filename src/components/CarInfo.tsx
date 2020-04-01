@@ -47,15 +47,24 @@ const CarInfo: React.FC = () => {
   console.log(car);
 
   return (
-    <Container maxWidth="xl" style={{ paddingTop: '35px' }}>
+    <Container maxWidth="xl" id="car-info">
       {car ? (
         <>
           <Grid container justify="space-between" alignItems="center">
             <Box>
-              <Box fontWeight="fontWeightBold" component="h1" m={0}>
+              <Box
+                fontWeight="fontWeightBold"
+                component="h1"
+                m={0}
+                className="font-size_mobile"
+              >
                 {`${car?.brand} ${car?.model}`}
               </Box>
-              <Typography variant="h6" color="textSecondary">
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                className="font-size_mobile"
+              >
                 {car.name}
               </Typography>
             </Box>
@@ -64,17 +73,22 @@ const CarInfo: React.FC = () => {
                 fontWeight="fontWeightBold"
                 fontSize={14}
                 color="text.secondary"
+                className="font-size_mobile"
               >
                 ЦЕНА, РУБ.
               </Box>
-              <Box fontWeight="fontWeightBold" fontSize={30}>
+              <Box
+                fontWeight="fontWeightBold"
+                fontSize={30}
+                className="font-size_mobile"
+              >
                 {formatPrice(price.new)}
               </Box>
               {price.new !== price.old && (
                 <Box
                   fontSize={14}
                   color="text.secondary"
-                  className="crossed-out-text"
+                  className="crossed-out-text font-size_mobile"
                 >
                   {formatPrice(price.old)}
                 </Box>
