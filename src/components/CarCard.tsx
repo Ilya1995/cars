@@ -135,11 +135,11 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
           <Box mt={2}>
             <Box mb={2} onClick={handleClick}>
               <LocationOnIcon style={{ verticalAlign: 'bottom' }} />
-              {`${car.dealerName}, ${car.main_office.city}`}
+              {`${car.dealerName}, ${car.main_office?.city}`}
             </Box>
             <Zoom in={checked} style={{ display: checked ? '' : 'none' }}>
               <Paper onClick={event => event.stopPropagation()} elevation={4}>
-                <YMap coordinates={car.main_office.location.coordinates} />
+                <YMap coordinates={car.main_office?.location.coordinates} />
               </Paper>
             </Zoom>
           </Box>

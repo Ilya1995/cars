@@ -1,17 +1,18 @@
 import { NotificationManager } from 'react-notifications';
-import { all, takeLatest, call, put } from 'redux-saga/effects';
+import { all, takeLatest, call, put, takeEvery } from 'redux-saga/effects';
 import {
   GET_CAR,
-  PUT_CAR,
   GET_CARS,
   PUT_CARS,
   GET_BRAND_CARS,
   PUT_BRAND_CARS,
   GetCarsActionType,
-  GetCarActionType
+  GetCarActionType,
+  CarType
 } from '../types/cars';
 import { SET_LOADER_BOTTOM } from '../types/app';
 import { PER_PAGE } from '../resources';
+import { putCar } from '../actions/cars';
 
 const fetchDataCar = (id: string) =>
   fetch(
@@ -20,8 +21,8 @@ const fetchDataCar = (id: string) =>
 
 function* getCarAsync(action: GetCarActionType) {
   try {
-    const data = yield call(() => fetchDataCar(action.payload));
-    yield put({ type: PUT_CAR, payload: data });
+    const data: CarType = yield call(() => fetchDataCar(action.payload));
+    yield put(putCar(data));
   } catch (error) {
     NotificationManager.error('Error loading car', 'Error!');
   } finally {
@@ -51,7 +52,7 @@ function* getCarsAsync(action: GetCarsActionType) {
 }
 
 function* watchGetCarsAsync() {
-  yield takeLatest(GET_CARS, getCarsAsync);
+  yield takeEvery(GET_CARS, getCarsAsync);
 }
 
 const fetchDataBrandCars = () =>

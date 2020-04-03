@@ -40,7 +40,7 @@ export type InitialStateType = {
 
 export type CarPaginationType = {
   perPage?: number;
-  page: number;
+  page?: number;
 };
 
 export type GetCarsActionType = {
@@ -60,7 +60,7 @@ export type PutCarsActionType = {
 
 export type PutCarActionType = {
   type: typeof PUT_CAR;
-  payload: CarType;
+  payload: CarType | null;
 };
 
 export type GetBrandCarsActionType = {

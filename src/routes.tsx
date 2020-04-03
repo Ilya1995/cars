@@ -7,11 +7,11 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 export const routes = (
   <Switch>
-    <Route exact path="/cars" component={Home}>
-      <Redirect to="/cars/automobiles" />
+    <Route exact path="/" component={Home}>
+      <Redirect to="/cars" />
     </Route>
-    <Route exact path="/cars/automobiles" component={ListCarCard} />
-    <Route exact path="/cars/automobiles/:id" component={CarInfo} />
+    <Route exact path="/cars" component={ListCarCard} />
+    <Route exact path="/cars/:id" component={CarInfo} />
     <Route component={NotFound} />
   </Switch>
 );

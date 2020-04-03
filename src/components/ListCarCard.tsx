@@ -37,7 +37,7 @@ export const ListCarCard: React.FC = () => {
   };
 
   return (
-    <>
+    <Container maxWidth="xl">
       <Grid
         className="my-50"
         container
@@ -67,11 +67,11 @@ export const ListCarCard: React.FC = () => {
             <LinearProgress className="linear-progress" />
           ) : (
             <VisibilitySensor onChange={onChangeBottom}>
-              <Box textAlign="center">. . . Загрузить еще . . .</Box>
+              <Box>&nbsp;</Box>
             </VisibilitySensor>
           )}
         </Box>
       </Container>
-    </>
+    </Container>
   );
 };

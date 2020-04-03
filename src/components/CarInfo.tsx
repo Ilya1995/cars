@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { getCarById } from '../actions/cars';
+import { getCarById, putCar } from '../actions/cars';
 import { CarType, ImageType } from '../types/cars';
 import { RootReducerType } from '../reducers';
 import StepperImages from './StepperImages';
@@ -32,9 +32,12 @@ const CarInfo: React.FC = () => {
   useEffect(() => {
     if (!id) {
       history.goBack();
-      return;
+    } else {
+      dispatch(getCarById(id));
     }
-    dispatch(getCarById(id));
+    return () => {
+      dispatch(putCar(null));
+    };
   }, [dispatch, history, id]);
 
   const car: CarType | null = useSelector(
