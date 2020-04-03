@@ -6,8 +6,8 @@ import { Route, Switch } from 'react-router-dom';
 
 export const routes = (
   <Switch>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/:id" component={CarInfo} />
+    <Route exact path="/cars" component={Home} />
+    <Route exact path="/cars/:id" component={CarInfo} />
     <Route component={NotFound} />
   </Switch>
 );
