@@ -52,10 +52,7 @@ export const ListCarCard: React.FC = () => {
             key={car.id}
             timeout={500}
           >
-            <Paper
-              elevation={4}
-              onClick={() => history.push(`/cars/automobiles/${car.id}`)}
-            >
+            <Paper elevation={4} onClick={() => history.push(`/${car.id}`)}>
               <CarCard car={car} />
             </Paper>
           </Zoom>
