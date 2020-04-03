@@ -2,7 +2,7 @@
   "name": "cars",
   "version": "3.3.5",
   "private": true,
-  "homepage": "http://mycar.ru",
+  "homepage": "http://mycar.host",
   "dependencies": {
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
