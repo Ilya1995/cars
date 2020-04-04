@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f2f5f5;
 }
 
 body,
@@ -111,23 +112,47 @@ code {
   #car-info .font-size_mobile {
     font-size: 14px;
   }
+
+  body {
+    background-color: white;
+  }
 }
 
-#characteristics {
-  margin-bottom: 40px;
+#characteristics,
+#dealer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 40px;
+  background-color: #f2f5f5;
 }
 
-#characteristics .char-grid {
+#characteristics .item-grid,
+#dealer .item-grid {
   flex-grow: 1;
   max-width: 100%;
   flex-basis: 100%;
 }
 
 @media screen and (min-width: 800px) {
-  #characteristics .char-grid {
+  #characteristics .item-grid,
+  #dealer .item-grid {
     flex-grow: 0;
     max-width: 49%;
     flex-basis: 49%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #characteristics,
+  #dealer {
+    max-width: 900px;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  #characteristics,
+  #dealer {
+    max-width: 1100px;
   }
 }
 

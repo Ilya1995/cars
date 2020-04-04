@@ -6,13 +6,18 @@ const DEFAULT_COORDINATES = [56.311102, 43.790876];
 
 type PropsType = {
   coordinates: number[];
+  width?: string;
 };
 
-const YMap: React.FC<PropsType> = ({ coordinates = DEFAULT_COORDINATES }) => {
+const YMap: React.FC<PropsType> = ({
+  coordinates = DEFAULT_COORDINATES,
+  width = '320px',
+}) => {
   return (
-    <Paper onClick={event => event.stopPropagation()} elevation={4}>
+    <Paper onClick={(event) => event.stopPropagation()} elevation={4}>
       <YMaps>
         <Map
+          width={width}
           defaultState={{
             center: coordinates,
             zoom: 14,
@@ -20,14 +25,14 @@ const YMap: React.FC<PropsType> = ({ coordinates = DEFAULT_COORDINATES }) => {
               'zoomControl',
               'fullscreenControl',
               'geolocationControl',
-              'trafficControl'
-            ]
+              'trafficControl',
+            ],
           }}
           modules={[
             'control.ZoomControl',
             'control.FullscreenControl',
             'control.GeolocationControl',
-            'control.TrafficControl'
+            'control.TrafficControl',
           ]}
         >
           <Placemark defaultGeometry={coordinates} />

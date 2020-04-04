@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -9,6 +8,7 @@ import { CarType, ImageType } from '../types/cars';
 import { RootReducerType } from '../reducers';
 import StepperImages from './StepperImages';
 import CharacteristicsCar from './CharacteristicsCar';
+import DealerInfo from './DealerInfo';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { DEFAULT_PRICE, formatPrice } from '../resources';
@@ -43,8 +43,9 @@ const CarInfo: React.FC = () => {
   console.log(car);
 
   return (
-    <Container maxWidth="xl" id="car-info">
+    <Box id="car-info">
       <Button
+        size="small"
         variant="contained"
         color="default"
         onClick={() => history.goBack()}
@@ -100,13 +101,16 @@ const CarInfo: React.FC = () => {
             </Box>
           </Grid>
 
-          {!isEmpty(carImages) && <StepperImages images={carImages} />}
-          <CharacteristicsCar car={car} />
+          <Box mt={5} pb={5} style={{ backgroundColor: 'white' }}>
+            {!isEmpty(carImages) && <StepperImages images={carImages} />}
+            <CharacteristicsCar car={car} />
+            <DealerInfo office={car.main_office} dealerName={car.dealerName} />
+          </Box>
         </>
       ) : (
         <CircularProgress id="loading" />
       )}
-    </Container>
+    </Box>
   );
 };
 

@@ -15,9 +15,12 @@ type PriceType = {
   value: number[][];
 };
 
-type OfficeType = {
+export type OfficeType = {
   city: string;
   location: { coordinates: number[] };
+  address: string;
+  phone: string;
+  url: string;
 };
 
 export type CarType = {

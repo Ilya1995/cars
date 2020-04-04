@@ -31,7 +31,7 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
-    setChecked(prev => !prev);
+    setChecked((prev) => !prev);
   };
 
   return (
@@ -138,8 +138,10 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
               {`${car.dealerName}, ${car.main_office?.city}`}
             </Box>
             <Zoom in={checked} style={{ display: checked ? '' : 'none' }}>
-              <Paper onClick={event => event.stopPropagation()} elevation={4}>
-                <YMap coordinates={car.main_office?.location.coordinates} />
+              <Paper onClick={(event) => event.stopPropagation()} elevation={4}>
+                <YMap
+                  coordinates={car.main_office?.location.coordinates.reverse()}
+                />
               </Paper>
             </Zoom>
           </Box>

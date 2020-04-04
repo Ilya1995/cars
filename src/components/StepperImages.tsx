@@ -19,11 +19,11 @@ const StepperImages: React.FC<PropsType> = ({ images }) => {
   const maxSteps = images.length;
 
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleStepChange = (step: number) => {
@@ -31,7 +31,7 @@ const StepperImages: React.FC<PropsType> = ({ images }) => {
   };
 
   return (
-    <Box maxWidth={800} m={'40px auto'}>
+    <Box maxWidth={800} m={'0 auto'}>
       <AutoPlaySwipeableViews
         index={activeStep}
         interval={5000}
@@ -46,7 +46,7 @@ const StepperImages: React.FC<PropsType> = ({ images }) => {
                 style={{
                   display: 'block',
                   overflow: 'hidden',
-                  width: '100%'
+                  width: '100%',
                 }}
                 src={step.url}
                 alt="imaga"

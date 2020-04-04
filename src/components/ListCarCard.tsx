@@ -37,7 +37,7 @@ export const ListCarCard: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="xl">
+    <Box>
       <Grid
         className="my-50"
         container
@@ -72,6 +72,6 @@ export const ListCarCard: React.FC = () => {
           )}
         </Box>
       </Container>
-    </Container>
+    </Box>
   );
 };
