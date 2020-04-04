@@ -3,25 +3,18 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import { getCarById, putCar } from '../actions/cars';
 import { CarType, ImageType } from '../types/cars';
 import { RootReducerType } from '../reducers';
 import StepperImages from './StepperImages';
+import CharacteristicsCar from './CharacteristicsCar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { DEFAULT_PRICE, formatPrice } from '../resources';
 import isEmpty from 'lodash/isEmpty';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// const tutorialSteps = [
-//   { url: '//media.jlr-connect.com/ZXFrovXCQTJQefkBEmdUn5' },
-//   { imgPath: '//media.jlr-connect.com/QFjGd7doMErYYvpPThNnMc' },
-//   { imgPath: '//media.jlr-connect.com/orr8bA2YUU7aGwT6RHYzcg' },
-//   { imgPath: '//media.jlr-connect.com/LqziyRY8aRU9PWup5Dh4zJ' },
-//   { imgPath: '//media.jlr-connect.com/5ApVwm2gT8XRWR49jMaMxF' },
-//   { imgPath: '//media.jlr-connect.com/jmddRj3PPsEDqwLF3CvyXb' },
-//   { imgPath: '//media.jlr-connect.com/NJzjtdo3DZAyGquyLUYhAS' }
-// ];
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 const CarInfo: React.FC = () => {
   const dispatch = useDispatch();
@@ -51,6 +44,14 @@ const CarInfo: React.FC = () => {
 
   return (
     <Container maxWidth="xl" id="car-info">
+      <Button
+        variant="contained"
+        color="default"
+        onClick={() => history.goBack()}
+        startIcon={<ChevronLeftIcon />}
+      >
+        Назад
+      </Button>
       {car ? (
         <>
           <Grid container justify="space-between" alignItems="center">
@@ -100,6 +101,7 @@ const CarInfo: React.FC = () => {
           </Grid>
 
           {!isEmpty(carImages) && <StepperImages images={carImages} />}
+          <CharacteristicsCar car={car} />
         </>
       ) : (
         <CircularProgress id="loading" />

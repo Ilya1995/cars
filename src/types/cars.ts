@@ -22,11 +22,19 @@ type OfficeType = {
 
 export type CarType = {
   id: string;
+  vin: string;
   name: string;
   price: PriceType;
   model: string;
   brand: string;
   year: number;
+  fuel: string;
+  engine_power: string;
+  transmission: string;
+  grade: string;
+  mileage: string;
+  drive_type: string;
+  engine_volume: string;
   dealerName: string;
   color: { name: string };
   main_office: OfficeType;

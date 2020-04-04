@@ -49,6 +49,10 @@ code {
   display: table;
 }
 
+.cusor-pointer {
+  cursor: pointer;
+}
+
 .crossed-out-text {
   text-decoration: line-through;
   color: #858b8c;
@@ -107,6 +111,29 @@ code {
   #car-info .font-size_mobile {
     font-size: 14px;
   }
+}
+
+#characteristics {
+  margin-bottom: 40px;
+}
+
+#characteristics .char-grid {
+  flex-grow: 1;
+  max-width: 100%;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  #characteristics .char-grid {
+    flex-grow: 0;
+    max-width: 49%;
+    flex-basis: 49%;
+  }
+}
+
+#characteristics .char-list {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 /************************** NOT FOUND *********************/
