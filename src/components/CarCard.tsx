@@ -27,8 +27,6 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
   const lastValue = car.price.value.pop() || DEFAULT_PRICE;
   const price = { old: lastValue[0], new: lastValue[1] };
 
-  console.log(car);
-
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.stopPropagation();
     setChecked((prev) => !prev);
@@ -69,10 +67,15 @@ const CarCard: React.FC<PropsType> = ({ car }) => {
           )}
         </Box>
         <CardContent>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" className="pruning-text">
             {`${car.brand} ${car.model}`}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            className="pruning-text"
+          >
             {car.name}
           </Typography>
 

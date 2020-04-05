@@ -15,6 +15,10 @@ import { DEFAULT_PRICE, formatPrice } from '../resources';
 import isEmpty from 'lodash/isEmpty';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { NotificationManager } from 'react-notifications';
 
 const CarInfo: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,22 +44,51 @@ const CarInfo: React.FC = () => {
   const lastValue = car?.price.value.pop() || DEFAULT_PRICE;
   const price = { old: lastValue[0], new: lastValue[1] };
 
-  console.log(car);
-
   return (
     <Box id="car-info">
-      <Button
-        size="small"
-        variant="contained"
-        color="default"
-        onClick={() => history.goBack()}
-        startIcon={<ChevronLeftIcon />}
-      >
-        Назад
-      </Button>
+      <AppBar position="sticky" className="header_opacity">
+        <Toolbar>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Button
+              size="small"
+              variant="contained"
+              className="nav-btn"
+              onClick={() => history.goBack()}
+              startIcon={<ChevronLeftIcon />}
+            >
+              Назад
+            </Button>
+            <Button
+              size="small"
+              variant="contained"
+              className="nav-btn"
+              onClick={() =>
+                NotificationManager.error(
+                  'Не так быстро ковбой, сайт ещё не готов',
+                  'Стоооой!'
+                )
+              }
+              endIcon={<ChevronRightIcon />}
+            >
+              Заказать
+            </Button>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+
       {car ? (
         <>
-          <Grid container justify="space-between" alignItems="center">
+          <Grid
+            container
+            justify="space-between"
+            alignItems="center"
+            style={{ marginTop: '40px' }}
+          >
             <Box>
               <Box
                 fontWeight="fontWeightBold"
@@ -101,7 +134,7 @@ const CarInfo: React.FC = () => {
             </Box>
           </Grid>
 
-          <Box mt={5} pb={5} style={{ backgroundColor: 'white' }}>
+          <Box pb={5} className="content">
             {!isEmpty(carImages) && <StepperImages images={carImages} />}
             <CharacteristicsCar car={car} />
             <DealerInfo office={car.main_office} dealerName={car.dealerName} />

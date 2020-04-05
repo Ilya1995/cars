@@ -1,6 +1,6 @@
 {
   "name": "cars",
-  "version": "3.3.8",
+  "version": "3.4.9",
   "private": true,
   "homepage": "http://ilya1995.github.io/cars",
   "dependencies": {

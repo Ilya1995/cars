@@ -45,9 +45,13 @@ code {
   display: inline-block;
 }
 
-.my-50 {
-  margin: 50px auto;
-  display: table;
+#car-info .nav-btn {
+  min-width: 120px;
+}
+
+#car-info .content {
+  margin-top: 40px;
+  background-color: white;
 }
 
 .cusor-pointer {
@@ -61,6 +65,12 @@ code {
 
 .card-root {
   min-width: 350px;
+}
+
+.pruning-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #loading {
@@ -98,8 +108,9 @@ code {
   fill: #9fa2a5;
 }
 
-#car-info {
-  padding-top: 35px;
+.content .header_opacity {
+  background-color: rgb(242, 245, 245, 0.7);
+  color: #333;
 }
 
 .step-img {
@@ -113,8 +124,22 @@ code {
     font-size: 14px;
   }
 
+  #car-info .content {
+    margin-top: 0;
+  }
+
   body {
     background-color: white;
+  }
+
+  .content h1 {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content h1 {
+    font-size: 1.1em;
   }
 }
 

@@ -4,9 +4,11 @@ import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Zoom from '@material-ui/core/Zoom';
+import Fade from '@material-ui/core/Fade';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
 import VisibilitySensor from 'react-visibility-sensor';
 import CarCard from './CarCard';
 import { getCars } from '../actions/cars';
@@ -38,8 +40,15 @@ export const ListCarCard: React.FC = () => {
 
   return (
     <Box>
+      <AppBar position="relative" className="header_opacity">
+        <Fade in timeout={1500}>
+          <Box textAlign="center" component="h1">
+            Подбери для себя новенький Landrover или Jaguar
+          </Box>
+        </Fade>
+      </AppBar>
+
       <Grid
-        className="my-50"
         container
         direction="row"
         justify="space-around"

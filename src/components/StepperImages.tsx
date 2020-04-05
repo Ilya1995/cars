@@ -31,7 +31,7 @@ const StepperImages: React.FC<PropsType> = ({ images }) => {
   };
 
   return (
-    <Box maxWidth={800} m={'0 auto'}>
+    <Box maxWidth={800} m={'0 auto'} pt={5}>
       <AutoPlaySwipeableViews
         index={activeStep}
         interval={5000}
